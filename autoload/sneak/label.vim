@@ -94,7 +94,8 @@ endf "}}}
 func! s:after() abort
   autocmd! sneak_label_cleanup
   silent! call matchdelete(w:sneak_cursor_hl)
-  call map(s:current_matches, {key, val -> matchdelete(val)})
+  call map(s:current_matches, 'matchdelete(v:val)')
+  let s:current_matches = []
   "remove temporary highlight links
   exec 'hi! link Conceal '.s:orig_hl_conceal
   exec 'hi! link Sneak '.s:orig_hl_sneak
